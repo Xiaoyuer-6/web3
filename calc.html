@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的计算器</title>
+    <script src="jquery-1.9.1.min.js"></script>
+    <script>
+        function myck(type) {
+            var  num1 = jQuery("#num1");
+            var  num2 = jQuery("#num2");
+            var total = 0;//定义一个结果；
+            //非空效验
+            if (num1.val()==""){//判断的是num1的值，而不是num1；
+                num1.focus();
+                alert("请输入数字1");
+                return false;//不进行循环；
+            }if(num2.val()==""){//同上
+                num2.focus();
+                alert("请输入数字2");
+                return false;
+
+            }
+            if(type==4){//清空操作
+                if(confirm("确定要清空吗？")){
+                    num1.val("");
+                    num2.val("");
+                    jQuery("#resultDiv").html("");//清空下面的结果区；
+                }
+                return false;//清空后循环不执行；
+            }
+
+            if(type==1){//相加操作
+                total = parseInt(num1.val()) + parseInt(num2.val());//要转换为int类型；才能相加，不然就是字符的拼接；
+
+            }else if(type==2){//相乘操作
+
+                total = parseInt(num1.val()) * parseInt(num2.val());//字符串类型转换为int类型
+            }else if(type==3){//相减操作
+
+                total = parseInt(num1.val()) - parseInt(num2.val());//字符串类型转换为int类型；
+            }
+
+            jQuery("#resultDiv").html("最终计算结果:"+total);//用下面定义的结果属性；显示最终结果
+        }
+
+        </script>
+</head>
+<body>
+<div style="text-align: center";>
+    <h1 style="margin-top: 100px;">计算器</h1>
+    数字1：<input id="num1" type="number"><p></p>
+    数字2：<input id="num2" type="number"><p></p>
+    <input type="button" value="相 加" onclick="myck(1)">
+    <input type="button" value="相 乘" onclick="myck(2)">
+    <input type="button" value="相 减" onclick="myck(3)">
+    <input type="button" value="清 空" onclick="myck(4)"><p></p>
+
+    <div style="font-size: 40px;" id="resultDiv">
+    </div>
+</div>
+</body>
+</html>
